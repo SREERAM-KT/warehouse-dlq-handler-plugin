@@ -2,22 +2,26 @@ package com.warehouse.dlq.handler.kafka.service;
 
 import com.warehouse.dlq.handler.kafka.model.DLQMessage;
 import com.warehouse.dlq.handler.properties.DLQProperties;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Slf4j
-@Service
-@RequiredArgsConstructor
+@Component
 public class DLQHandlerService {
     private final DLQProperties dlqProperties;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
+    public DLQHandlerService(DLQProperties dlqProperties, KafkaTemplate<String, String> kafkaTemplate) {
+        this.dlqProperties = dlqProperties;
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
     public void handleDLQMessage(String topic, String key, String value, Exception exception, int retryCount) {
-        if (dlqProperties == null) {
+        if (dlqProperties.getTopics().isEmpty()) {
             log.error("DLQProperties is not configured");
             return;
         }
@@ -35,7 +39,7 @@ public class DLQHandlerService {
             return;
         }
 
-        String dlqTopic = topic + dlqProperties.getDeadLetterSuffix();
+        String dlqTopic = topic + Optional.ofNullable(dlqProperties.getDeadLetterSuffix()).orElse(".DLQ");
         DLQMessage dlqMessage = DLQMessage.builder()
                 .topic(dlqTopic)
                 .key(key)
@@ -54,7 +58,7 @@ public class DLQHandlerService {
             log.error("KafkaTemplate is not configured. Cannot send message to DLQ topic: {}", dlqTopic);
             return;
         }
-        
+
         kafkaTemplate.send(dlqTopic, key, value);
     }
 
