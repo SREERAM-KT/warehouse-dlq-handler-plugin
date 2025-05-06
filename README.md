@@ -19,5 +19,3 @@ A Spring Boot application for handling Dead Letter Queue (DLQ) messages in the w
    ```bash
    mvn spring-boot:run
    ```
-
-The application will start on port 8080.
