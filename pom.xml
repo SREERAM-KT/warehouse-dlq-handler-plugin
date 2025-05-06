@@ -14,8 +14,15 @@
     <groupId>com.warehouse</groupId>
     <artifactId>WarehouseDLQHandlerPlugin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>WarehouseDLQHandlerPlugin</name>
     <description>Warehouse DLQ Handler Plugin</description>
+    <modules>
+        <module>warehouse-dlq-handler-config</module>
+        <module>warehouse-dlq-handler-plugin-properties</module>
+        <module>warehouse-dlq-handler-plugin-config</module>
+        <module>warehouse-dlq-handler-plugin-kafka</module>
+    </modules>
 
     <properties>
         <java.version>21</java.version>
