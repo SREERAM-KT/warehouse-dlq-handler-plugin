@@ -33,6 +33,14 @@ public class DLQHandlerService {
             return;
         }
 
+        String exceptionClassName = exception.getCause().getClass().getCanonicalName();
+
+        if(topicConfig.getExceptionClasses().stream()
+                .noneMatch(exc -> exc.equals(exceptionClassName))) {
+            log.warn("DLQ handling is not enabled for topic: {} with exception {}",
+                    topic, exceptionClassName);
+        }
+
         if (retryCount >= topicConfig.getMaxRetryCount()) {
             log.error("Message exceeded max retry count for topic: {}. Max retries: {}, Current retries: {}", 
                      topic, topicConfig.getMaxRetryCount(), retryCount);
