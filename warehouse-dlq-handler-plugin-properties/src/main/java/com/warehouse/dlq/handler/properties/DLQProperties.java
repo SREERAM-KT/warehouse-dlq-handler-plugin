@@ -3,7 +3,6 @@ package com.warehouse.dlq.handler.properties;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,6 @@ public class DLQProperties {
 
     @Getter
     @Setter
-    @Validated
     public static class TopicConfig {
         private String topicName;
         private int maxRetryCount;
