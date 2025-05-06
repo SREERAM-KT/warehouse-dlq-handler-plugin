@@ -5,7 +5,10 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-config/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-kafka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-kafka/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-properties/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warehouse-dlq-handler-plugin-properties/src/main/resources" charset="UTF-8" />
   </component>
 </project>

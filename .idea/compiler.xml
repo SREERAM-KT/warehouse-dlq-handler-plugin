@@ -15,9 +15,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="WarehouseDLQHandlerPlugin" options="" />
-      <module name="warehouse-dlq-handler-plugin-config" options="-parameters" />
-      <module name="warehouse-dlq-handler-plugin-kafka" options="-parameters" />
-      <module name="warehouse-dlq-handler-plugin-properties" options="-parameters" />
+      <module name="warehouse-dlq-handler-plugin-config" options="" />
+      <module name="warehouse-dlq-handler-plugin-kafka" options="" />
+      <module name="warehouse-dlq-handler-plugin-properties" options="" />
     </option>
   </component>
 </project>

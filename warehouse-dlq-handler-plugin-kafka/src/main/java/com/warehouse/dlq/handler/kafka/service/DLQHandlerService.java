@@ -2,8 +2,8 @@ package com.warehouse.dlq.handler.kafka.service;
 
 import com.warehouse.dlq.handler.kafka.model.DLQMessage;
 import com.warehouse.dlq.handler.properties.DLQProperties;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +11,10 @@ import java.time.Instant;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class DLQHandlerService {
-    @Autowired
-    private DLQProperties dlqProperties;
-    
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private final DLQProperties dlqProperties;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public void handleDLQMessage(String topic, String key, String value, Exception exception, int retryCount) {
         if (dlqProperties == null) {
