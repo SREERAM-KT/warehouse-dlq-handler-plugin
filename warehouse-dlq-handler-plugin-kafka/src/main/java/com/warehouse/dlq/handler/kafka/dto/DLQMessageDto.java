@@ -1,4 +1,4 @@
-package com.warehouse.dlq.handler.kafka.model;
+package com.warehouse.dlq.handler.kafka.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.time.Instant;
 
 @Data
 @Builder
-public class DLQMessage {
+public class DLQMessageDto {
     private String topic;
     private String key;
     private String value;

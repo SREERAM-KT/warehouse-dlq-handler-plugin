@@ -1,6 +1,6 @@
 package com.warehouse.dlq.handler.kafka.service;
 
-import com.warehouse.dlq.handler.kafka.model.DLQMessage;
+import com.warehouse.dlq.handler.kafka.dto.DLQMessageDto;
 import com.warehouse.dlq.handler.properties.DLQProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -40,7 +40,7 @@ public class DLQHandlerService {
         }
 
         String dlqTopic = topic + Optional.ofNullable(dlqProperties.getDeadLetterSuffix()).orElse(".DLQ");
-        DLQMessage dlqMessage = DLQMessage.builder()
+        DLQMessageDto dlqMessage = DLQMessageDto.builder()
                 .topic(dlqTopic)
                 .key(key)
                 .value(value)
