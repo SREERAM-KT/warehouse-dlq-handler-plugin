@@ -1,21 +1,21 @@
-# Warehouse DLQ Handler Plugin
+# 📦 Warehouse Kafka DLQ Plugin
 
-A Spring Boot application for handling Dead Letter Queue (DLQ) messages in the warehouse system.
+This plugin enables retry and Dead Letter Queue (DLQ) support for Kafka consumers within the Warehouse service.  
+It ensures failed messages are retried and, upon exhaustion, redirected to a DLQ topic for further inspection or reprocessing.
 
-## Requirements
+---
 
-- Java 21
-- Maven 3.6+
-- Spring Boot 3.2.3
+## ⚙️ Required Configuration Properties
 
-## Getting Started
+Add the following properties to your `application.yml` or `application.properties` file to enable DLQ handling:
 
-1. Clone the repository
-2. Build the project:
-   ```bash
-   mvn clean install
-   ```
-3. Run the application:
-   ```bash
-   mvn spring-boot:run
-   ```
+```properties
+# Suffix added to the original topic name to create the DLQ topic
+warehouse.dlq.deadLetterSuffix=.DLQ
+
+# Configuration for the first Kafka topic
+warehouse.dlq.topics[0].topicName=test-topic
+warehouse.dlq.topics[0].enabled=true
+warehouse.dlq.topics[0].maxRetryCount=3
+warehouse.dlq.topics[0].defaultRetryBackoffMs=1000
+warehouse.dlq.topics[0].exceptionClasses[0]=java.lang.IllegalArgumentException
