@@ -5,6 +5,11 @@ It ensures failed messages are retried and, upon exhaustion, redirected to a DLQ
 
 ---
 
+## 👥 Contributors
+
+- [Mahipathi Yugandhar](https://github.com/YUGANDHAR-3)
+- [Sreeram KT](https://github.com/SREERAM-KT)
+
 ## ⚙️ Required Configuration Properties
 
 Add the following properties to your `application.yml` or `application.properties` file to enable DLQ handling:
