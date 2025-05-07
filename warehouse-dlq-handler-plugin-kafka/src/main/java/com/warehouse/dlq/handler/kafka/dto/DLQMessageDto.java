@@ -13,7 +13,6 @@ public class DLQMessageDto {
     private String value;
     private String exception;
     private String exceptionMessage;
-    private int retryCount;
     private Instant timestamp;
     private String originalTopic;
 } 

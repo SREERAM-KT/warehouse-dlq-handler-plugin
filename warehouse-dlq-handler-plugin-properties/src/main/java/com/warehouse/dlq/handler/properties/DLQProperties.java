@@ -24,10 +24,8 @@ public class DLQProperties {
     @Setter
     public static class TopicConfig {
         private String topicName;
-        private int maxRetryCount;
         private List<String> exceptionClasses = Collections.emptyList();
         private boolean enabled;
-        private long defaultRetryBackoffMs;
     }
 
     @Getter

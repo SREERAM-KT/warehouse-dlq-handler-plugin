@@ -20,7 +20,7 @@ public class DLQHandlerService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void handleDLQMessage(String topic, String key, String value, Exception exception, int retryCount) {
+    public void handleDLQMessage(String topic, String key, String value, Exception exception) {
         if (dlqProperties.getTopics().isEmpty()) {
             log.error("DLQProperties is not configured");
             return;
@@ -39,13 +39,9 @@ public class DLQHandlerService {
                 .noneMatch(exc -> exc.equals(exceptionClassName))) {
             log.warn("DLQ handling is not enabled for topic: {} with exception {}",
                     topic, exceptionClassName);
-        }
-
-        if (retryCount >= topicConfig.getMaxRetryCount()) {
-            log.error("Message exceeded max retry count for topic: {}. Max retries: {}, Current retries: {}", 
-                     topic, topicConfig.getMaxRetryCount(), retryCount);
             return;
         }
+
 
         String dlqTopic = topic + Optional.ofNullable(dlqProperties.getDeadLetterSuffix()).orElse(".DLQ");
         DLQMessageDto dlqMessage = DLQMessageDto.builder()
@@ -54,7 +50,6 @@ public class DLQHandlerService {
                 .value(value)
                 .exception(exception.getClass().getName())
                 .exceptionMessage(exception.getMessage())
-                .retryCount(retryCount)
                 .timestamp(Instant.now())
                 .originalTopic(topic)
                 .build();
